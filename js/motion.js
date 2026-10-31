@@ -39,28 +39,39 @@
     document.querySelectorAll('.stat strong').forEach((el) => io.observe(el));
   }
 
-  // Lanyard ID badge: drag to swing, tap to flip, sways when the page scrolls
+  // Lanyard ID badge: drag to swing, pull down to stretch the strap, tap to flip, sways when the page scrolls
   const lan = document.getElementById('lanyard');
   if (lan) {
     const badge = lan.querySelector('.badge');
+    const strap = lan.querySelector('.strap');
+    const clip = lan.querySelector('.clip');
     const wrap = lan.parentElement;
-    let angle = 0, vel = 0, y = 0, yVel = 0;
+    let angle = 0, vel = 0, y = 0, yVel = 0, stretch = 0, sVel = 0, grabDist = 0;
     let dragging = false, moved = false, suppressClick = false, start = null, running = false, visible = true;
-    const MAX = 65;
+    const MAX = 65, MAX_STRETCH = 170;
 
-    const render = () => { lan.style.transform = `translateY(${y.toFixed(2)}px) rotate(${angle.toFixed(2)}deg)`; };
+    const render = () => {
+      lan.style.transform = `translateY(${y.toFixed(2)}px) rotate(${angle.toFixed(2)}deg)`;
+      // scale the strap (stripes run vertically, so they don't distort) and move clip + card down with it
+      strap.style.transform = `scaleY(${((strap.offsetHeight + stretch) / strap.offsetHeight).toFixed(4)})`;
+      clip.style.transform = badge.style.transform = `translateY(${stretch.toFixed(2)}px)`;
+    };
     const loop = () => {
       if (!dragging) {
         vel += -0.025 * angle - 0.06 * vel;   // spring back to hanging straight, with damping
         angle = Math.max(-MAX, Math.min(MAX, angle + vel));
+        sVel += -0.09 * stretch - 0.1 * sVel; // elastic recoil: overshoots up a little, then settles
+        stretch = Math.max(-25, stretch + sVel);
       }
       yVel += -0.08 * y - 0.18 * yVel;
       y += yVel;
       render();
-      const settled = !dragging && Math.abs(angle) < 0.02 && Math.abs(vel) < 0.02 && Math.abs(y) < 0.05 && Math.abs(yVel) < 0.05;
-      if (settled || !visible) { running = false; if (settled) { angle = vel = y = yVel = 0; render(); } return; }
+      const still = (a, b) => Math.abs(a) < 0.03 && Math.abs(b) < 0.03;
+      const settled = !dragging && still(angle, vel) && still(y, yVel) && still(stretch, sVel);
+      if (settled || !visible) { running = false; if (settled) { angle = vel = y = yVel = stretch = sVel = 0; render(); } return; }
       requestAnimationFrame(loop);
     };
+    const anchor = () => { const r = wrap.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top }; }; // strap hangs from top centre
     const wake = () => { if (!running && !reduce) { running = true; requestAnimationFrame(loop); } };
 
     badge.addEventListener('click', () => {
@@ -76,6 +87,8 @@
         if (e.button !== 0) return;
         dragging = true; moved = false;
         start = { x: e.clientX, y: e.clientY };
+        const a = anchor();
+        grabDist = Math.hypot(e.clientX - a.x, e.clientY - a.y) - stretch; // length at rest, measured to the grab point
         badge.setPointerCapture(e.pointerId);
         wake();
       });
@@ -83,11 +96,15 @@
         if (!dragging) return;
         if (!moved && Math.hypot(e.clientX - start.x, e.clientY - start.y) > 6) moved = true;
         if (!moved) return;
-        const r = wrap.getBoundingClientRect();
-        const ax = r.left + r.width / 2, ay = r.top; // the strap hangs from the top centre
-        const next = Math.max(-MAX, Math.min(MAX, -Math.atan2(e.clientX - ax, Math.max(20, e.clientY - ay)) * 180 / Math.PI));
+        const a = anchor();
+        const dx = e.clientX - a.x, dy = e.clientY - a.y;
+        const next = Math.max(-MAX, Math.min(MAX, -Math.atan2(dx, Math.max(20, dy)) * 180 / Math.PI));
         vel = next - angle;
         angle = next;
+        const pull = Math.hypot(dx, dy) - grabDist;
+        const nextStretch = pull > 0 ? MAX_STRETCH * (1 - Math.exp(-pull / MAX_STRETCH)) : 0; // gets harder to pull the further it goes
+        sVel = nextStretch - stretch;
+        stretch = nextStretch;
       });
       const end = () => { if (!dragging) return; dragging = false; if (moved) suppressClick = true; wake(); };
       badge.addEventListener('pointerup', end);
