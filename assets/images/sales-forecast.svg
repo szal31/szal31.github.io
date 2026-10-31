@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f43f5e"/><stop offset="1" stop-color="#881337"/></linearGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <circle cx="140" cy="1060" r="240" fill="#fff" opacity=".06"/>
+  <rect x="160" y="200" width="1280" height="800" rx="32" fill="#fff"/>
+  <text x="220" y="280" fill="#0f172a" font-size="32" font-weight="600">Popia Nyum · weekly sales</text>
+  <text x="220" y="318" fill="#64748b" font-size="22">Linear vs quadratic regression</text>
+  <g font-size="20" fill="#475569">
+    <rect x="980" y="262" width="30" height="6" rx="3" fill="#94a3b8"/><text x="1022" y="272">Linear  R² 0.52</text>
+    <rect x="980" y="300" width="30" height="8" rx="4" fill="#be123c"/><text x="1022" y="311">Quadratic  R² 0.63</text>
+  </g>
+  <g stroke="#f1f5f9" stroke-width="3">
+    <line x1="260" y1="420" x2="1360" y2="420"/><line x1="260" y1="560" x2="1360" y2="560"/>
+    <line x1="260" y1="700" x2="1360" y2="700"/><line x1="260" y1="840" x2="1360" y2="840"/>
+  </g>
+  <line x1="300" y1="760" x2="1320" y2="480" stroke="#94a3b8" stroke-width="5" stroke-dasharray="14 10"/>
+  <path d="M300 800 Q 760 430 1320 560" fill="none" stroke="#be123c" stroke-width="7" stroke-linecap="round"/>
+  <g fill="#be123c" stroke="#fff" stroke-width="5">
+    <circle cx="300" cy="780" r="15"/><circle cx="470" cy="660" r="15"/><circle cx="640" cy="640" r="15"/>
+    <circle cx="810" cy="560" r="15"/><circle cx="980" cy="600" r="15"/><circle cx="1150" cy="520" r="15"/><circle cx="1320" cy="580" r="15"/>
+  </g>
+  <g fill="#94a3b8" font-size="20" text-anchor="middle">
+    <text x="300" y="890">Wk 1</text><text x="470" y="890">Wk 2</text><text x="640" y="890">Wk 3</text><text x="810" y="890">Wk 4</text>
+    <text x="980" y="890">Wk 5</text><text x="1150" y="890">Wk 6</text><text x="1320" y="890">Wk 7</text>
+  </g>
+  <rect x="220" y="922" width="300" height="56" rx="28" fill="#ffe4e6"/>
+  <text x="370" y="958" fill="#be123c" font-size="21" font-weight="600" text-anchor="middle">+ break-even analysis</text>
+</svg>

@@ -1,0 +1,47 @@
+/* ==========================================================
+   THEME — change the look of the whole site here.
+   Swap fonts in the @import line and the two --font variables.
+   Colors: light mode first, dark mode below.
+   ========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --font-display: 'Fraunces', Georgia, serif;   /* headings */
+  --font-body: 'Inter', system-ui, sans-serif;  /* body text */
+
+  --bg: #f6f4ef;          /* page background */
+  --surface: #ffffff;     /* cards, pills */
+  --text: #16161a;        /* main text */
+  --muted: #5b5b66;       /* secondary text */
+  --line: #e2ded5;        /* borders */
+  --accent: #d9481f;      /* highlight color */
+  --spotlight: rgba(217, 72, 31, 0.08); /* cursor glow */
+
+  --radius: 14px;         /* corner roundness */
+  --max-width: 1120px;    /* content width */
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f0f12;
+    --surface: #18181d;
+    --text: #f2f0eb;
+    --muted: #a3a3ad;
+    --line: #2a2a31;
+    --accent: #ff7a50;
+    --spotlight: rgba(255, 122, 80, 0.07);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f0f12;
+  --surface: #18181d;
+  --text: #f2f0eb;
+  --muted: #a3a3ad;
+  --line: #2a2a31;
+  --accent: #ff7a50;
+  --spotlight: rgba(255, 122, 80, 0.07);
+  color-scheme: dark;
+}

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#4c1d95"/></linearGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <g font-family="Georgia, serif" font-weight="700" text-anchor="middle">
+    <g transform="translate(560 620) rotate(-14)">
+      <rect x="-170" y="-250" width="340" height="500" rx="28" fill="#fff"/>
+      <text y="60" fill="#7c3aed" font-size="200">3</text><text x="-120" y="-180" fill="#7c3aed" font-size="48">+</text>
+    </g>
+    <g transform="translate(1040 620) rotate(14)">
+      <rect x="-170" y="-250" width="340" height="500" rx="28" fill="#fff"/>
+      <text y="60" fill="#7c3aed" font-size="200">4</text><text x="-120" y="-180" fill="#7c3aed" font-size="48">×</text>
+    </g>
+    <g transform="translate(800 580)">
+      <rect x="-180" y="-270" width="360" height="530" rx="30" fill="#fde047" stroke="#fff" stroke-width="10"/>
+      <text y="80" fill="#4c1d95" font-size="260">7</text>
+      <text x="-125" y="-195" fill="#4c1d95" font-size="52">=</text>
+    </g>
+  </g>
+  <g font-size="28" font-weight="600" text-anchor="middle">
+    <rect x="430" y="930" width="320" height="70" rx="35" fill="#fff"/><text x="590" y="975" fill="#5b21b6">Best Game</text>
+    <rect x="850" y="930" width="320" height="70" rx="35" fill="#fff"/><text x="1010" y="975" fill="#5b21b6">Crowd's Choice</text>
+  </g>
+  <text x="800" y="230" fill="#ede9fe" font-size="30" text-anchor="middle" letter-spacing="4">INTERNATIONAL MATH DAY 2025</text>
+</svg>
