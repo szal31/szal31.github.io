@@ -77,7 +77,7 @@ window.SITE = {
         role: "Personal project",
         summary: "A pipeline that collects, checks and publishes data every day by itself",
         description: "Every day a GitHub Actions job downloads Malaysia's fuel prices, ringgit exchange rates and inflation by state, checks them with dbt tests on DuckDB, and publishes them to a live page. If a source fails its checks, its last good data stays up and I get an email.",
-        results: ["Runs daily at 6pm Malaysia time with no manual step", "Blocked a real Bank Negara server error: old data stayed, the page flagged it, the email went out", "Fuel prices since 2017, 26 currencies since 2020, inflation since 2010"],
+        results: ["Scheduled to run every evening with no manual step", "Blocked a real Bank Negara server error: old data stayed, the page flagged it, the email went out", "Fuel prices since 2017, 26 currencies since 2020, inflation since 2010"],
         tags: ["dbt", "DuckDB", "GitHub Actions", "Data quality", "Streamlit"],
         color: "#d9481f",
         image: "assets/images/cost-of-living.png",
