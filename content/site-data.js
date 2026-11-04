@@ -52,7 +52,7 @@ window.SITE = {
   work: {
     title: "Selected *projects*",
     nav: "Projects",
-    intro: "Machine learning and analytics work from my degree. Click any one for the details.",
+    intro: "Machine learning, data engineering and analytics, from my degree and my own projects. Click any one for the details.",
     projects: [
       {
         title: "Damaged License Plate Classification",
@@ -71,20 +71,109 @@ window.SITE = {
         linkLabel: ""
       },
       {
-        // SAMPLE project: made up for the demo
-        title: "Credit Card Fraud Detection",
-        category: ["Machine Learning"],
+        title: "Malaysia Cost of Living Data Pipeline",
+        category: ["Data Engineering", "Analytics"],
         year: "2026",
         role: "Personal project",
-        summary: "Catching rare fraud cases in highly imbalanced data",
-        description: "Built a fraud detection model on 284,000 card transactions where only 0.17% were fraud. Handled the imbalance with SMOTE and class weights, then tuned XGBoost against precision–recall instead of plain accuracy.",
-        results: ["PR-AUC of 0.88 on the hold-out set", "Caught 85% of fraud while keeping false alarms under 1%", "SHAP values to explain why each transaction was flagged"],
-        tags: ["XGBoost", "Imbalanced data", "SMOTE", "SHAP"],
-        color: "#dc2626",
-        image: "assets/images/fraud.svg",
-        imageAlt: "Bank card with a fraud risk score beside a list of flagged transactions",
-        link: "",
-        linkLabel: ""
+        summary: "A pipeline that collects, checks and publishes data every day by itself",
+        description: "Every day a GitHub Actions job downloads Malaysia's fuel prices, ringgit exchange rates and inflation by state, checks them with dbt tests on DuckDB, and publishes them to a live page. If a source fails its checks, its last good data stays up and I get an email.",
+        results: ["Runs daily at 6pm Malaysia time with no manual step", "Blocked a real Bank Negara server error: old data stayed, the page flagged it, the email went out", "Fuel prices since 2017, 26 currencies since 2020, inflation since 2010"],
+        tags: ["dbt", "DuckDB", "GitHub Actions", "Data quality", "Streamlit"],
+        color: "#d9481f",
+        image: "assets/images/cost-of-living.png",
+        imageAlt: "Line chart of RON95 market, BUDI95 and diesel prices in Malaysia",
+        link: "https://malaysia-cost-of-living-data-pipeline.streamlit.app/",
+        linkLabel: "Open the live page"
+      },
+      {
+        title: "Malaysia Economy AI Assistant",
+        category: ["Machine Learning", "NLP"],
+        year: "2026",
+        role: "Personal project",
+        summary: "RAG chatbot that answers from Bank Negara reports and cites the page",
+        description: "Ask about Malaysia's economy in English or Malay and get a short answer from Bank Negara reports with the page for every fact. Searches 800 passages with Gemini embeddings, and a lookup tool answers inflation questions from official price data.",
+        results: ["28 of 31 test report questions answered correctly (graded by hand), including all 11 in Malay", "Embeddings found the right page for 90% of questions, against 29% for keyword search", "Refused all 5 questions the reports can't answer instead of guessing"],
+        tags: ["RAG", "Gemini", "Embeddings", "Evaluation", "Streamlit"],
+        color: "#2a78d6",
+        image: "assets/images/economy-rag.png",
+        imageAlt: "Bar chart comparing keyword, embedding and hybrid search accuracy",
+        link: "https://malaysia-economic-ai-assistant.streamlit.app/",
+        linkLabel: "Try the assistant"
+      },
+      {
+        title: "Malay Tweet Sentiment with BERT",
+        category: ["Machine Learning", "NLP"],
+        year: "2026",
+        role: "Personal project",
+        summary: "Fine-tuned transformers for Malay and Manglish tweets",
+        description: "Compared a TF-IDF baseline with two fine-tuned transformers on 2,000 human-labelled Malaysian tweets, all trained on a CPU laptop. The model is on Hugging Face with a live demo.",
+        results: ["Fine-tuning raised test macro-F1 from 0.58 to 0.63", "Chose the smaller Malaysian BERT: same accuracy at 2.5 times less size", "Read the 105 wrong answers to find why: Neutral mix-ups, disputed labels and sarcasm"],
+        tags: ["BERT", "PyTorch", "Transformers", "Hugging Face"],
+        color: "#0f766e",
+        image: "assets/images/malay-sentiment.png",
+        imageAlt: "Bar chart comparing the baseline and two transformer models",
+        link: "https://malay-tweet-sentiment-analysis.streamlit.app/",
+        linkLabel: "Try the demo"
+      },
+      {
+        title: "Demand Forecasting and Inventory Planning",
+        category: ["Machine Learning", "Forecasting"],
+        year: "2026",
+        role: "Personal project",
+        summary: "Can a better forecast let a store hold less stock?",
+        description: "Forecast weekly demand for 50 top-selling Walmart food items with LightGBM, tuned with Optuna and tracked in MLflow, then backtested on 26 unseen weeks and turned into an inventory policy.",
+        results: ["20.1% WAPE, against 22.3% for last-week naive", "15% less average inventory than the best simple method, at the same 98% service level", "SHAP showed last week's sales matter far more than price"],
+        tags: ["LightGBM", "Optuna", "SHAP", "MLflow"],
+        color: "#7c3aed",
+        image: "assets/images/demand-forecast.png",
+        imageAlt: "Chart of inventory needed by each forecasting method",
+        link: "https://github.com/szal31/Demand-Forecasting-Inventory-of-Walmart",
+        linkLabel: "View on GitHub"
+      },
+      {
+        title: "Rapid KL Rail Ridership",
+        category: ["Analytics"],
+        year: "2026",
+        role: "Personal project",
+        summary: "How Klang Valley rail recovered after COVID",
+        description: "Explored daily ridership from January 2019 on data.gov.my, with an interactive app to filter by line, period and day type, covering recovery, commuting patterns and public holidays.",
+        results: ["The 4 original lines reached 116% of 2019 riders in 2025", "MRT Kajang overtook LRT Kelana Jaya as the busiest line", "Weekday public holidays cut ridership by 25–44%"],
+        tags: ["Python", "Altair", "Streamlit", "Open data"],
+        color: "#0369a1",
+        image: "assets/images/rapidkl.png",
+        imageAlt: "Line chart of rail ridership recovering after 2020",
+        link: "https://rapidkl-ridership-analysis.streamlit.app/",
+        linkLabel: "Open the app"
+      },
+      {
+        title: "Malaysia Inflation Dashboard",
+        category: ["Analytics"],
+        year: "2026",
+        role: "Personal project",
+        summary: "Where prices are rising fastest, by state and category",
+        description: "A three-page Power BI dashboard on OpenDOSM's consumer price index, with a state heatmap and a drill-through into what drives inflation in each state.",
+        results: ["Inflation ranged from 0.5% in Sarawak to 2.4% in Negeri Sembilan and Labuan (Sep 2026)", "Prices in Putrajaya rose most since January 2020, up 19.3%"],
+        tags: ["Power BI", "DAX", "Power Query"],
+        color: "#b45309",
+        image: "assets/images/inflation-dashboard.png",
+        imageAlt: "Power BI dashboard overview page of inflation by state",
+        link: "https://app.powerbi.com/view?r=eyJrIjoiZmZjNDg2ODItNzJhMy00OTllLWJmNTYtM2Q5MDg4YWFiMGQxIiwidCI6ImNkY2JiMGUyLTlmZWEtNGY1NC04NjcwLTY3MjcwNzc5N2FkYSIsImMiOjEwfQ%3D%3D",
+        linkLabel: "Open the dashboard"
+      },
+      {
+        title: "RFM Customer Segmentation in SQL",
+        category: ["Analytics"],
+        year: "2026",
+        role: "Personal project",
+        summary: "Which customers drive revenue, and who to win back",
+        description: "Segmented customers of a UK online gift retailer by recency, frequency and monetary value in SQL, from about 1.07M transactions, and turned the segments into marketing actions.",
+        results: ["Champions are 26% of customers but 72% of revenue", "Found 443 high-value at-risk customers worth £1.4M as the best win-back target"],
+        tags: ["SQL", "RFM", "Cohort analysis"],
+        color: "#be185d",
+        image: "assets/images/rfm-segments.png",
+        imageAlt: "Chart of revenue share by customer segment",
+        link: "https://github.com/szal31/RFM-Customer-Segmentation-Using-SQL",
+        linkLabel: "View on GitHub"
       },
       {
         title: "Sentiment Analysis of Apple Product Reviews",
@@ -98,22 +187,6 @@ window.SITE = {
         color: "#0f766e",
         image: "assets/images/sentiment.svg",
         imageAlt: "Product review cards labelled positive and negative beside a 74.3% accuracy ring",
-        link: "",
-        linkLabel: ""
-      },
-      {
-        // SAMPLE project: made up for the demo
-        title: "Customer Segmentation with K-Means",
-        category: ["Machine Learning", "Analytics"],
-        year: "2026",
-        role: "Personal project",
-        summary: "Grouping online shoppers by how they buy",
-        description: "Calculated Recency, Frequency and Monetary (RFM) scores for 4,300 customers of an online retailer, then used K-Means clustering to find natural customer groups. Picked the number of clusters with the elbow method and silhouette score.",
-        results: ["3 clear segments: Champions, Regulars and At-risk", "Champions were 18% of customers but 52% of revenue", "Suggested a win-back campaign for the At-risk group"],
-        tags: ["Unsupervised learning", "K-Means", "RFM", "Python"],
-        color: "#0284c7",
-        image: "assets/images/segmentation.svg",
-        imageAlt: "Scatter plot of three customer clusters with segment summary cards",
         link: "",
         linkLabel: ""
       },
@@ -133,22 +206,6 @@ window.SITE = {
         linkLabel: ""
       },
       {
-        // SAMPLE project: made up for the demo
-        title: "Klang Valley Air Quality Forecast",
-        category: ["Forecasting"],
-        year: "2025",
-        role: "Personal project",
-        summary: "Forecasting the Air Pollution Index a week ahead",
-        description: "Used five years of daily Air Pollution Index readings to build time-series forecasts, comparing ARIMA with an LSTM network and testing on haze-season data.",
-        results: ["7-day forecast with 12% average error", "LSTM beat ARIMA during haze season"],
-        tags: ["Time series", "LSTM", "ARIMA", "Python"],
-        color: "#c2410c",
-        image: "assets/images/air-quality.svg",
-        imageAlt: "Line chart of air pollution readings with a shaded forecast band",
-        link: "",
-        linkLabel: ""
-      },
-      {
         title: "Sales Forecasting for Popia Nyum",
         category: ["Forecasting", "Analytics"],
         year: "2026",
@@ -160,22 +217,6 @@ window.SITE = {
         color: "#be123c",
         image: "assets/images/sales-forecast.svg",
         imageAlt: "Weekly sales points with a linear and a quadratic regression line",
-        link: "",
-        linkLabel: ""
-      },
-      {
-        // SAMPLE project: made up for the demo
-        title: "Selangor Property Price Predictor",
-        category: ["Machine Learning"],
-        year: "2026",
-        role: "Personal project",
-        summary: "A live web app that estimates house prices",
-        description: "Scraped 6,000 property listings, cleaned them in Pandas and trained a gradient boosting model on size, location and property type. Deployed it as a Streamlit web app so anyone can get an instant price estimate.",
-        results: ["R² of 0.81 on unseen listings", "Live app with a simple form and a price range", "Location was the strongest price driver"],
-        tags: ["Regression", "Web scraping", "Streamlit", "Deployment"],
-        color: "#7c3aed",
-        image: "assets/images/house-price.svg",
-        imageAlt: "Scatter plot of house size against price with a predicted price card",
         link: "",
         linkLabel: ""
       },
@@ -203,12 +244,12 @@ window.SITE = {
     photo: "assets/images/portrait.jpg",
     paragraphs: [
       "I'm a Mathematics student at UiTM Shah Alam, specialising in Big Data Analytics, and I want to use machine learning to solve real business problems.",
-      "My work so far covers computer vision, fraud detection, customer segmentation, sentiment analysis and forecasting. I like the whole journey: collecting and cleaning messy data, testing models properly with cross-validation, and explaining the result in plain language.",
+      "My work so far covers data pipelines, RAG, sentiment analysis, computer vision, forecasting and customer segmentation. I like the whole journey: collecting and cleaning messy data, testing models properly with cross-validation, and explaining the result in plain language.",
       "Outside the classroom I tutor Mathematics and Additional Mathematics, led sports events for a college of 1,000 students, and captain a PUBG Mobile esports team that has represented Perak and UiTM nationally. I speak English, Malay and Indonesian, and I'm learning French."
     ],
     stats: [
       { value: "First", label: "Class student" },
-      { value: "8", label: "ML & analytics projects" },
+      { value: "11", label: "ML & analytics projects" },
       { value: "11/12", label: "Tutoring students improved" }
     ]
   },
@@ -276,11 +317,11 @@ window.SITE = {
     title: "What I *use*",
     nav: "Skills",
     groups: [
-      { name: "Machine Learning", items: ["Classification", "Regression", "Feature extraction", "Cross-validation", "Hyperparameter tuning"] },
+      { name: "Machine Learning", items: ["Classification", "Regression", "Feature extraction", "Cross-validation", "Hyperparameter tuning", "RAG", "Transformers fine-tuning"] },
       { name: "Programming", items: ["Python", "SQL", "R", "MATLAB", "C++"] },
-      { name: "Libraries", items: ["Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "OpenCV", "XGBoost", "Streamlit"] },
+      { name: "Libraries", items: ["Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "OpenCV", "XGBoost", "LightGBM", "PyTorch", "Transformers", "Streamlit"] },
       { name: "Analytics & BI", items: ["Power BI", "Tableau", "Excel", "Weka", "Altair AI Studio"] },
-      { name: "Data & Tools", items: ["MySQL", "MongoDB", "Git", "VS Code", "Google Colab"] },
+      { name: "Data & Tools", items: ["MySQL", "MongoDB", "dbt", "DuckDB", "GitHub Actions", "MLflow", "Git", "VS Code", "Google Colab"] },
       { name: "Languages", items: ["English", "Malay", "Indonesian", "French (basic)"] }
     ]
   },
