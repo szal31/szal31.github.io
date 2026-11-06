@@ -55,24 +55,9 @@ window.SITE = {
     intro: "Machine learning, data engineering and analytics, from my degree and my own projects. Click any one for the details.",
     projects: [
       {
-        title: "Damaged License Plate Classification",
-        category: ["Machine Learning", "Computer Vision"], // used by the filter buttons
-        featured: true, // shown as the big card at the top
-        year: "2026 · In progress",
-        role: "Final Year Project",
-        summary: "Computer vision pipeline that spots damaged plates",
-        description: "A machine learning pipeline on 1,000 Kaggle license plate images (500 normal, 500 degraded with synthetic blur, blockage and noise). It combines HOG and LBP feature extraction to classify each plate as damaged or normal.",
-        results: ["Comparing SVM, Random Forest and KNN to find the best model", "Balanced dataset of 500 normal and 500 degraded images"],
-        tags: ["Computer Vision", "HOG + LBP", "SVM", "scikit-learn"],
-        color: "#4338ca",
-        image: "assets/images/license-plate.svg",
-        imageAlt: "A clear and a damaged license plate feeding into a feature extraction and classifier pipeline",
-        link: "",
-        linkLabel: ""
-      },
-      {
         title: "Malaysia Cost of Living Data Pipeline",
-        category: ["Data Engineering", "Analytics"],
+        category: ["Data Engineering", "Analytics"], // used by the filter buttons
+        featured: true, // shown as the big card at the top
         year: "2026",
         role: "Personal project",
         summary: "A pipeline that collects, checks and publishes data every day by itself",
@@ -84,6 +69,21 @@ window.SITE = {
         imageAlt: "Line chart of RON95 market, BUDI95 and diesel prices in Malaysia",
         link: "https://malaysia-cost-of-living-data-pipeline.streamlit.app/",
         linkLabel: "Open the live page"
+      },
+      {
+        title: "Damaged License Plate Classification",
+        category: ["Machine Learning", "Computer Vision"],
+        year: "2026 · In progress",
+        role: "Final Year Project",
+        summary: "Computer vision pipeline that spots damaged plates",
+        description: "A machine learning pipeline on 1,000 Kaggle license plate images (500 normal, 500 degraded with synthetic blur, blockage and noise). It combines HOG and LBP feature extraction to classify each plate as damaged or normal.",
+        results: ["Comparing SVM, Random Forest and KNN to find the best model", "Balanced dataset of 500 normal and 500 degraded images"],
+        tags: ["Computer Vision", "HOG + LBP", "SVM", "scikit-learn"],
+        color: "#4338ca",
+        image: "assets/images/license-plate.svg",
+        imageAlt: "A clear and a damaged license plate feeding into a feature extraction and classifier pipeline",
+        link: "",
+        linkLabel: ""
       },
       {
         title: "Malaysia Economy AI Assistant",
