@@ -18,9 +18,16 @@
   const tags = (list) => (list && list.length ? `<ul class="tags">${list.map((t) => `<li class="tag">${esc(t)}</li>`).join('')}</ul>` : '');
   const chips = (list) => (list && list.length ? `<span class="tags">${list.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</span>` : ''); // for inside buttons
   const initials = (t) => esc(plain(t).split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase());
-  const media = (p, cls) => p.image
-    ? `<span class="${cls}"><img src="${esc(p.image)}" alt="${esc(p.imageAlt || p.title)}" loading="lazy"></span>`
-    : `<span class="${cls} thumb"${p.color ? ` style="--c:${esc(p.color)}"` : ''} aria-hidden="true">${initials(p.title)}</span>`;
+  // youtube: "https://youtu.be/ID" (any YouTube link form) → video thumbnail on cards, player in the popup
+  const ytId = (u) => (String(u || '').match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)([\w-]{11})/) || [])[1];
+  const media = (p, cls) => {
+    const yt = ytId(p.youtube);
+    const img = p.image || (yt ? `https://i.ytimg.com/vi/${yt}/maxresdefault.jpg` : '');
+    return img
+      ? `<span class="${cls}${yt ? ' has-video' : ''}"><img src="${esc(img)}" alt="${esc(p.imageAlt || p.title)}" loading="lazy"></span>`
+      : `<span class="${cls} thumb"${p.color ? ` style="--c:${esc(p.color)}"` : ''} aria-hidden="true">${initials(p.title)}</span>`;
+  };
+  const player = (p) => `<span class="dialog-media video-embed"><iframe src="https://www.youtube-nocookie.com/embed/${ytId(p.youtube)}?rel=0" title="${esc(p.title)} video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>`;
   const external = (href) => /^https?:/.test(href) ? ' target="_blank" rel="noopener"' : '';
 
   const svg = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
@@ -108,7 +115,7 @@
         <ul class="projects">${projects.map((p, i) => i === fi ? '' : `
           <li class="project-item reveal" data-cats="${cats(p)}"><button class="project" type="button" data-project="${i}">
             <span class="project-index">${String(i + 1).padStart(2, '0')}</span>
-            <span><span class="project-title">${esc(p.title)}</span><span class="project-sub">${esc(p.summary)} · ${esc(p.year)}</span></span>
+            <span><span class="project-title">${esc(p.title)}</span><span class="project-sub">${esc(p.summary)}${p.year ? ` · ${esc(p.year)}` : ''}</span></span>
             ${media(p, 'project-thumb')}
           </button></li>`).join('')}
         </ul>
@@ -127,6 +134,43 @@
           ${d.photo && FX.lanyard ? lanyard(d) : media({ image: d.photo, imageAlt: `Portrait of ${P.name}`, title: P.name, color: '' }, 'about-photo reveal')}
         </div>
       </section>`,
+
+    // A training programme / fellowship with its deliverables, grouped into tabs (e.g. Written, Visual, Data)
+    programme: (d) => {
+      const items = (d.groups || []).flatMap((g) => (g.items || []).map((it) => ({ ...it, group: g.name })));
+      const groups = (d.groups || []).map((g) => g.name);
+      const kind = (f) => (/\.pdf$/i.test(f) ? 'PDF' : /\.xlsx?$/i.test(f) ? 'Excel' : /\.pptx?$/i.test(f) ? 'Slides' : /\.docx?$/i.test(f) ? 'Word' : 'File');
+      const cover = (it) => it.video
+        ? `<video class="deliverable-media" controls preload="metadata" playsinline src="${esc(it.video)}#t=0.5"></video>`
+        : it.image
+          ? `<span class="deliverable-media"><img src="${esc(it.image)}" alt="${esc(it.imageAlt || it.title)}" loading="lazy"></span>`
+          : `<span class="deliverable-media doc-cover"${it.color ? ` style="--c:${esc(it.color)}"` : ''} aria-hidden="true"><small>${esc(it.stage || it.group)}</small><strong>${esc(it.file ? kind(it.file) : 'File')}</strong></span>`;
+      return `
+      <section class="section wrap" id="programme" aria-labelledby="programme-title">
+        ${head('programme', d)}
+        <div class="programme-intro reveal">
+          ${d.text ? `<p>${esc(d.text)}</p>` : ''}
+          ${d.facts && d.facts.length ? `<dl class="facts">${d.facts.map((f) => `<div><dt>${esc(f.label)}</dt><dd>${esc(f.value)}</dd></div>`).join('')}</dl>` : ''}
+        </div>
+        ${groups.length > 1 ? `<div class="filters reveal" role="group" aria-label="Filter deliverables">
+          <button class="filter" type="button" data-filter="" aria-pressed="true">All <span>${items.length}</span></button>
+          ${groups.map((g) => `<button class="filter" type="button" data-filter="${esc(g)}" aria-pressed="false">${esc(g)} <span>${items.filter((it) => it.group === g).length}</span></button>`).join('')}
+        </div>` : ''}
+        <ul class="deliverables">${items.map((it) => `
+          <li class="deliverable reveal" data-cats="${esc(it.group)}">
+            ${cover(it)}
+            <div class="deliverable-body">
+              <p class="deliverable-meta">${it.stage ? `<span class="stage">${esc(it.stage)}</span>` : ''}${esc(it.group)}</p>
+              <h3>${esc(it.title)}</h3>
+              <p>${esc(it.summary)}</p>
+              ${it.highlights && it.highlights.length ? `<ul class="results">${it.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>` : ''}
+              ${tags(it.tags)}
+              ${it.file ? `<a class="btn btn-ghost doc-link" href="${esc(it.file)}"${/\.pdf$/i.test(it.file) ? ' target="_blank" rel="noopener"' : ' download'}>${esc(it.fileLabel || (/\.pdf$/i.test(it.file) ? 'Open PDF' : 'Download ' + kind(it.file)))} ↗</a>` : ''}
+            </div>
+          </li>`).join('')}
+        </ul>
+      </section>`;
+    },
 
     achievements: (d) => `
       <section class="section wrap" id="achievements" aria-labelledby="achievements-title">
@@ -253,16 +297,16 @@
     addEventListener('pointermove', (e) => { glow.style.setProperty('--mx', e.clientX + 'px'); glow.style.setProperty('--my', e.clientY + 'px'); }, { passive: true });
   }
 
-  // Project filters
-  const applyFilter = (value) => {
-    main.querySelectorAll('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.filter === value));
+  // Filter buttons (projects, programme deliverables): each only affects its own section
+  const applyFilter = (section, value) => {
+    section.querySelectorAll('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.filter === value));
     let shown = 0;
-    main.querySelectorAll('#work [data-cats]').forEach((el) => {
+    section.querySelectorAll('[data-cats]').forEach((el) => {
       const show = !value || el.dataset.cats.split('|').includes(value);
       el.hidden = !show;
       if (show) { shown++; el.classList.add('in'); }
     });
-    const empty = main.querySelector('.filter-empty');
+    const empty = section.querySelector('.filter-empty');
     if (empty) empty.hidden = shown > 0;
   };
 
@@ -278,9 +322,9 @@
     current = i;
     dlg.innerHTML = `
       <button class="icon-btn dialog-close" type="button" aria-label="Close">${icons.close}</button>
-      ${media(p, 'dialog-media')}
+      ${ytId(p.youtube) ? player(p) : media(p, 'dialog-media')}
       <div class="dialog-body">
-        <p class="dialog-meta">${esc(p.year)} · ${esc(p.role)} · ${i + 1} of ${n}</p>
+        <p class="dialog-meta">${[p.year, p.role, `${i + 1} of ${n}`].filter(Boolean).map(esc).join(' · ')}</p>
         <h2>${esc(p.title)}</h2>
         <p>${esc(p.description || p.summary)}</p>
         ${p.results && p.results.length ? `<ul class="results">${p.results.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>` : ''}
@@ -299,7 +343,7 @@
 
   main.addEventListener('click', (e) => {
     const f = e.target.closest('[data-filter]');
-    if (f) return applyFilter(f.dataset.filter);
+    if (f) return applyFilter(f.closest('section'), f.dataset.filter);
     const btn = e.target.closest('[data-project]');
     if (btn) openProject(+btn.dataset.project);
   });
@@ -312,7 +356,10 @@
     if (e.key === 'ArrowLeft') step(-1);
     if (e.key === 'ArrowRight') step(1);
   });
-  dlg.addEventListener('close', () => history.replaceState(null, '', location.pathname + location.search));
+  dlg.addEventListener('close', () => {
+    dlg.innerHTML = ''; // stops a playing video, which would keep sounding in a hidden dialog
+    history.replaceState(null, '', location.pathname + location.search);
+  });
 
   // Open a shared project link like page.html#project-credit-card-fraud-detection
   const linked = location.hash.match(/^#project-(.+)$/);

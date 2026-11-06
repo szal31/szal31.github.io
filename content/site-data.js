@@ -221,6 +221,21 @@ window.SITE = {
         linkLabel: ""
       },
       {
+        title: "MovieMetrics",
+        category: ["Analytics"],
+        year: "",
+        role: "Group project · DSC651",
+        summary: "Power BI dashboard on box office performance and profit",
+        description: "A Power BI dashboard built for a data visualization course, showing how movies perform at the box office and how much profit they make, using 3,907 films released between 1929 and 2016.",
+        results: ["KPI cards, box office and median ROI by genre, and trends by decade", "Loss rate by budget level, budget against box office, and IMDb and award comparisons", "Top 10 directors and lead actors by box office"],
+        tags: ["Power BI", "EDA", "Dashboard design"],
+        color: "#1d6fb8",
+        image: "assets/images/moviemetrics.png",
+        imageAlt: "Bar chart of the number of films by genre, led by comedy and action",
+        link: "https://github.com/szal31/MovieMetrics",
+        linkLabel: "View on GitHub"
+      },
+      {
         title: "Lucky 7 — Math Card Game",
         category: ["Fun"],
         year: "2025",
@@ -249,7 +264,7 @@ window.SITE = {
     ],
     stats: [
       { value: "First", label: "Class student" },
-      { value: "11", label: "ML & analytics projects" },
+      { value: "12", label: "ML & analytics projects" },
       { value: "11/12", label: "Tutoring students improved" }
     ]
   },
@@ -319,8 +334,8 @@ window.SITE = {
     groups: [
       { name: "Machine Learning", items: ["Classification", "Regression", "Feature extraction", "Cross-validation", "Hyperparameter tuning", "RAG", "Transformers fine-tuning"] },
       { name: "Programming", items: ["Python", "SQL", "R", "MATLAB", "C++"] },
-      { name: "Libraries", items: ["Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "OpenCV", "XGBoost", "LightGBM", "PyTorch", "Transformers", "Streamlit"] },
-      { name: "Analytics & BI", items: ["Power BI", "Tableau", "Excel", "Weka", "Altair AI Studio"] },
+      { name: "Libraries", items: ["Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "OpenCV", "LightGBM", "Optuna", "SHAP", "PyTorch", "Transformers", "Streamlit"] },
+      { name: "Analytics & BI", items: ["Power BI", "DAX", "Power Query", "Tableau", "Excel", "Weka", "Altair AI Studio"] },
       { name: "Data & Tools", items: ["MySQL", "MongoDB", "dbt", "DuckDB", "GitHub Actions", "MLflow", "Git", "VS Code", "Google Colab"] },
       { name: "Languages", items: ["English", "Malay", "Indonesian", "French (basic)"] }
     ]
