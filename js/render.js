@@ -38,7 +38,8 @@
     close: svg('<path d="M6 6l12 12M18 6 6 18"/>'),
     left: svg('<path d="M19 12H5M11 6l-6 6 6 6"/>'),
     right: svg('<path d="M5 12h14M13 6l6 6-6 6"/>'),
-    trophy: svg('<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/>')
+    trophy: svg('<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/>'),
+    people: svg('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>')
   };
 
   let count = 0;
@@ -75,6 +76,20 @@
       </div>
       <p class="lanyard-hint" aria-hidden="true">Drag me · tap to flip</p>
     </div>`;
+
+  // Card grid shared by Awards and Leadership: each item has year (the small pill), title, detail, optional image
+  const cardSection = (id, d, icon) => `
+      <section class="section wrap" id="${id}" aria-labelledby="${id}-title">
+        ${head(id, d)}
+        <ul class="awards">${(d.items || []).map((a) => `
+          <li class="award reveal">
+            ${a.image ? `<span class="award-photo"><img src="${esc(a.image)}" alt="${esc(a.imageAlt || a.title)}" loading="lazy"></span>` : `<span class="award-icon">${icon}</span>`}
+            <span class="award-year">${esc(a.year)}</span>
+            <h3>${esc(a.title)}</h3>
+            <p>${esc(a.detail)}</p>
+          </li>`).join('')}
+        </ul>
+      </section>`;
 
   const sections = {
     hero: (d) => `
@@ -172,18 +187,8 @@
       </section>`;
     },
 
-    achievements: (d) => `
-      <section class="section wrap" id="achievements" aria-labelledby="achievements-title">
-        ${head('achievements', d)}
-        <ul class="awards">${(d.items || []).map((a) => `
-          <li class="award reveal">
-            <span class="award-icon">${icons.trophy}</span>
-            <span class="award-year">${esc(a.year)}</span>
-            <h3>${esc(a.title)}</h3>
-            <p>${esc(a.detail)}</p>
-          </li>`).join('')}
-        </ul>
-      </section>`,
+    achievements: (d) => cardSection('achievements', d, icons.trophy),
+    leadership: (d) => cardSection('leadership', d, icons.people),
 
     experience: (d) => `
       <section class="section wrap" id="experience" aria-labelledby="experience-title">

@@ -35,7 +35,7 @@ window.SITE = {
 
   // Order of sections on the page. Delete one to hide it.
   // "experience" is hidden; add it back to show the Journey timeline.
-  sections: ["hero", "work", "about", "achievements", "skills", "contact"],
+  sections: ["hero", "work", "about", "achievements", "leadership", "skills", "contact"],
 
   hero: {
     headline: ["Turning raw *data*", "into clear decisions."],
@@ -242,11 +242,11 @@ window.SITE = {
         role: "Co-inventor · International Math Day",
         summary: "A card game that makes arithmetic fun for kids",
         description: "Co-invented Lucky 7, a math card game for children, for International Math Day 2025. It was judged live by 500 parents and children.",
-        results: ["Won Best Game", "Won Crowd's Choice"],
+        results: ["Won Best Booth", "Won Crowd's Choice", "Presented to the Vice Chancellor of UiTM"],
         tags: ["Game design", "Math education"],
         color: "#7c3aed",
-        image: "assets/images/lucky7.svg",
-        imageAlt: "Playing cards showing 3, 4 and 7 with math symbols",
+        image: "assets/images/project-lucky7.jpg",
+        imageAlt: "Sanad presenting the Lucky 7 game booth to the Vice Chancellor of UiTM",
         link: "",
         linkLabel: ""
       }
@@ -273,10 +273,30 @@ window.SITE = {
     title: "Awards & *wins*",
     nav: "Awards",
     items: [
-      { year: "Now", title: "First Class student", detail: "BSc (Hons) Mathematics, Big Data Analytics at UiTM Shah Alam." },
-      { year: "2025", title: "Best Game & Crowd's Choice", detail: "Lucky 7 math card game at International Math Day 2025, judged live by 500 parents and children." },
-      { year: "2023 & 2024", title: "Anugerah Rektor: Best Sports Team", detail: "UiTM Perak, as captain of the PUBG Mobile esports team." },
-      { year: "2022 & 2026", title: "National esports podium", detail: "2nd (2022) and 3rd (2026) nationally. Represented Perak at SUKMA 2024 and UiTM at SUKIPT 2026." }
+      { year: "May 2025", title: "Best Booth & Crowd's Choice", detail: "Lucky 7 math card game at International Math Day, UiTM. Evaluated hands-on by about 500 parents and children, and presented to the Vice Chancellor of UiTM.", image: "assets/images/award-math-day.jpg", imageAlt: "Sanad's team receiving their International Math Day award on stage" },
+      { year: "Jan 2025", title: "Anugerah Pasukan Sukan Terbaik 2024", detail: "Best Sports Team award at UiTM Perak's Anugerah Kecemerlangan Pelajar, with the PUBG Mobile esports team.", image: "assets/images/award-anugerah-2024.jpg", imageAlt: "Team receiving a certificate on stage at Anugerah Kecemerlangan Pelajar" },
+      { year: "Nov 2023", title: "Anugerah Khas Rektor 2023", detail: "Rector's Special Award (Team Sports), UiTM Perak, for winning the 2023 Perak Menteri Besar Cup and representing Perak at SUKMA 2024.", image: "assets/images/award-rektor-2023.jpg", imageAlt: "Sanad holding a trophy and certificate at Anugerah Kecemerlangan Pelajar 2023" },
+      { year: "2022 & 2026", title: "National esports podium", detail: "3rd at PMNC Fall 2026, qualifying for PUBG Mobile Pro League Fall 2026 as the only varsity team ever to compete there. 2nd nationally in 2022.", image: "assets/images/award-pmnc-team.jpg", imageAlt: "TZ Nostar team lineup for PUBG Mobile Pro League Malaysia Fall 2026" },
+      { year: "Oct 2025", title: "JPA Scholar", detail: "Program Ijazah Dalam Negara (PIDN) scholarship from Jabatan Perkidmatan Awam for my degree at UiTM." },
+      { year: "Now", title: "First Class student", detail: "BSc (Hons) Mathematics, Big Data Analytics at UiTM Shah Alam." }
+    ]
+  },
+
+  leadership: {
+    title: "Leadership & *activities*",
+    nav: "Leadership",
+    intro: "As Sports & Recreation Exco of Alpha College (Mar 2024 – Feb 2025) I looked after the welfare of 1,000+ students. These are the programmes I helped run.",
+    items: [
+      { year: "Programme Director · Jan 2025", title: "Alpha Final Run", detail: "Led the offline closing ceremony run of the Alpha Community Run, celebrating participants' achievements and promoting a healthy, active lifestyle.", image: "assets/images/lead-final-run.jpg", imageAlt: "Alpha Final Run event poster" },
+      { year: "Head of Food & Supply · Jan 2025", title: "Kursus Imam Muda", detail: "Managed food and supply for a 30-student programme developing young leaders and teaching them to lead prayers as imams.", image: "assets/images/lead-imam-muda.jpg", imageAlt: "Kursus Imam Muda event poster" },
+      { year: "Assistant Programme Director · Jan 2025", title: "MyKasih Alpha: Sentuhan Kasih", detail: "Community outreach at Rumah Anak Yatim Darul Sakinah, coordinating clothing donations, cleaning and games for the children.", image: "assets/images/lead-mykasih.jpg", imageAlt: "MyKasih Alpha: Sentuhan Kasih event poster" },
+      { year: "Assistant Programme Director · Dec 2024", title: "Prosper Path Management", detail: "Student development programme for 100 UiTM Tapah students on personal management, financial awareness and life planning.", image: "assets/images/lead-prosper-path.jpg", imageAlt: "Prosper Path Management event poster" },
+      { year: "Program Treasurer · Dec 2024", title: "Used Clothes Donation Drive", detail: "Managed the finances and encouraged students to donate pre-loved clothing for foster homes and people in need.", image: "assets/images/lead-used-clothes.jpg", imageAlt: "Used Clothes Donation Drive event poster" },
+      { year: "Head of Food & Supply · Nov 2024", title: "Generasi Prihatin Alpha", detail: "Community outreach at SK Jernang, Sungkai, supporting science experiments, water rocket making and sports games.", image: "assets/images/lead-generasi-prihatin.jpg", imageAlt: "Generasi Prihatin Alpha event poster" },
+      { year: "Head of Sports Events · Nov 2024", title: "Karnival Usahawan Muda & Permainan Dulu-Dulu", detail: "Oversaw six traditional games for 250+ students, including ceper, baling selipar and lari dalam guni, and coordinated the Young Entrepreneurs programme.", image: "assets/images/lead-karnival.jpg", imageAlt: "Karnival Usahawan Muda & Permainan Dulu-Dulu event poster" },
+      { year: "Moderator · Jun 2024", title: "Career Talk with E-sport", detail: "Moderated a talk with Sir Cloud on careers in esports, organised by the College Gamma committee, and won the event's PUBG tournament.", image: "assets/images/lead-career-talk.jpg", imageAlt: "Career Talk with E-sport event poster" },
+      { year: "Logistics & Tools · Apr 2024", title: "Meet & Greet Kolej Alpha", detail: "Helped organise an event introducing about 1,000 Kolej Alpha residents to the college's management, structure and resources.", image: "assets/images/lead-meet-greet.jpg", imageAlt: "Meet & Greet Kolej Alpha event poster" },
+      { year: "Programme Director · Oct 2024", title: "Alpha Community Run", detail: "Organised an online running event with 680 participants (400 male, 280 female), three competition categories and winners announced weekly." }
     ]
   },
 
